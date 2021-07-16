@@ -20,7 +20,11 @@ class Fatura extends Model
     protected $fillable = [
         'preco_total',
         'data_venda',
-        'endereco_entrega'
+        'cep',
+        'uf',
+        'cidade',
+        'bairro',
+        'rua'
     ];
 
     protected $casts = [

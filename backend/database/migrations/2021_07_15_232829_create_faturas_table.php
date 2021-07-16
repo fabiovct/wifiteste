@@ -17,7 +17,11 @@ class CreateFaturasTable extends Migration
             $table->id();
             $table->float('preco_total',8,2);
             $table->date('data_venda');
-            $table->text('endereco_entrega');
+            $table->string('cep');
+            $table->string('uf');
+            $table->string('cidade');//localidade
+            $table->string('bairro');
+            $table->text('rua');//logradouro
             $table->timestamps();
         });
     }

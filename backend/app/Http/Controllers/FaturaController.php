@@ -21,7 +21,11 @@ class FaturaController extends Controller
             $fatura = new Fatura();
             $fatura->preco_total = $request->preco_total;
             $fatura->data_venda = Date::now();
-            $fatura->endereco_entrega = $request->endereco_entrega;
+            $fatura->cep = $request->cep;
+            $fatura->uf = $request->uf;
+            $fatura->cidade = $request->cidade;
+            $fatura->bairro = $request->bairro;
+            $fatura->rua = $request->rua;
             $fatura->save();
 
 
