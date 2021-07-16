@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\FaturaController;
 use App\Http\Controllers\ProdutoController;
 use Illuminate\Http\Request;
@@ -31,6 +32,6 @@ Route::group(['prefix' => 'fatura'], function () {
     Route::post('adicionar-produto', [FaturaController::class, 'adiconarProduto']);
 });
 
-// Route::group(['prefix' => 'endereco'], function () {
-//     Route::post('buscar-dados', [EnderecoController::class, 'buscarDados']);
-// });
+Route::group(['prefix' => 'endereco'], function () {
+    Route::post('buscar-dados', [EnderecoController::class, 'buscarDados']);
+});
