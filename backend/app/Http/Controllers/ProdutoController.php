@@ -12,11 +12,11 @@ class ProdutoController extends Controller
 
     public function searchProdutos(Request $request){
         try {
-            if(isset($request->nome)){
-                $produtos = Produto::where('nome','like','%'.$request->nome.'%')->get();
+            if($request->tipo_busca=='nome'){
+                $produtos = Produto::where('nome','like','%'.$request->busca_produto.'%')->get();
             }
-            if(isset($request->referencia)){
-                $produtos = Produto::where('referencia','like','%'.$request->referencia.'%')->get();
+            if($request->tipo_busca=='referencia'){
+                $produtos = Produto::where('referencia','like','%'.$request->busca_produto.'%')->get();
             }
             
             return response()->json($produtos);
