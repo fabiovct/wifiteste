@@ -27,4 +27,17 @@ class Produto extends Model
 
 
 
+    public function produtos()
+    {
+        return $this->belongsToMany(Fornecedor::class, 'produtos_fornecedores', 'produtos_id', 'fornecedores_id');
+    }
+
+    //    public function customerproposal(){
+    //     return $this->belongsToMany('App\Linkmex\Customer','proposal_customer','proposal_id','customer_id')->withTimestamps();
+    // }
+
+
+
+
+
 }

@@ -28,5 +28,9 @@ Route::group(['prefix' => 'produtos'], function () {
 
 Route::group(['prefix' => 'fatura'], function () {
     Route::post('cadastrar-fatura', [FaturaController::class, 'cadastrarFatura']);
-    // Route::post('adicionar-produto', [FaturaController::class, 'adiconarProduto']);
+    Route::post('adicionar-produto', [FaturaController::class, 'adiconarProduto']);
 });
+
+// Route::group(['prefix' => 'endereco'], function () {
+//     Route::post('buscar-dados', [EnderecoController::class, 'buscarDados']);
+// });

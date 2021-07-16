@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Fatura;
+use App\Models\Produto;
 use App\Models\ProdutoFatura;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Date;
@@ -35,6 +36,17 @@ class FaturaController extends Controller
             }
 
             return response()->json('Fatura Cadastrada Com Sucesso');
+        } catch (QueryException $e) {
+            return response()->json([
+                "error" => $e
+            ]);
+        }  
+    }
+
+    public function adiconarProduto(Request $request){
+        try {
+            $produto = Produto::where('id',$request->id)->with('produtos')->first();
+            return response()->json($produto);
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
