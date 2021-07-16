@@ -54,4 +54,25 @@ class FaturaController extends Controller
         }  
     }
 
+    public function historicoFaturas(){
+        try {
+            $faturas = Fatura::with('itens')->get();
+            
+            return response()->json($faturas);
+        } catch (QueryException $e) {
+            return response()->json([
+                "error" => $e
+            ]);
+        }  
+    }
+
 }
+
+/*
+O cliente necessita ter o o 
+histórico completo das vendas, 
+com seus itens, 
+valor total, 
+data e 
+endereço de entrega completo;
+*/
