@@ -18,7 +18,7 @@ class CreateFaturasTable extends Migration
             $table->integer('id_produtos_faturas');
             $table->float('preco_total',8,2);
             $table->date('data_venda');
-            $table->text('endreco_entrega');
+            $table->text('endereco_entrega');
             $table->timestamps();
         });
     }

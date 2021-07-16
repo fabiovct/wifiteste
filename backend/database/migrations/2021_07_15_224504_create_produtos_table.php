@@ -17,7 +17,7 @@ class CreateProdutosTable extends Migration
             $table->id();
             $table->string('nome');
             $table->float('preco');
-            $table->string('referencia',8,2);
+            $table->string('referencia',8,2)->unique();
             $table->timestamps();
         });
     }
