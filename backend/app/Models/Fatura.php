@@ -18,7 +18,6 @@ class Fatura extends Model
      * @var array
      */
     protected $fillable = [
-        'id_produtos_faturas',
         'preco_total',
         'data_venda',
         'endereco_entrega'

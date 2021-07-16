@@ -15,7 +15,6 @@ class CreateFaturasTable extends Migration
     {
         Schema::create('faturas', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_produtos_faturas');
             $table->float('preco_total',8,2);
             $table->date('data_venda');
             $table->text('endereco_entrega');
