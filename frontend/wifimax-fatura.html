@@ -70,14 +70,14 @@
 
 
                 </div>
-                <table class="table" id="table">
+                <table class="table table-hover table-striped" id="table">
                 </table>
 
                 <hr class="linha-form"></hr>
 
                 <div class="form-row ml-3 mr-3">
                     <h5 class="ml-3">Itens Da Fatura:</h5>
-                    <table class="table" id="table-fatura"></table>
+                    <table class="table table-hover table-striped" id="table-fatura"></table>
                     <h5>Valor Total:<input required id="valor_total" readonly></h5>
                     
                 </div>
@@ -135,7 +135,7 @@
                         var result_dados = result;
                         $('#thead').remove()
                         $('#tbody').remove()
-                        $('#table').append('<thead id="thead"><tr><th scope="col">Nome</th><th scope="col">Preco</th><th scope="col">Referência</th><th scope="col"></th></tr></thead>')
+                        $('#table').append('<thead id="thead"><tr><th scope="col">Nome</th><th scope="col">Preço</th><th scope="col">Referência</th><th scope="col"></th></tr></thead>')
                         $('#table').append('<tbody id="tbody">')
                         result_dados.forEach(element => {
                             var b=element.referencia
@@ -174,7 +174,7 @@
                        valor_total += result.preco
                     produtos_fatura.push(result)
                        $('#thead-fatura').remove()
-                       $('#table-fatura').append('<thead id="thead-fatura"><tr><th scope="col">Nome</th><th scope="col">Fornecedor(es)</th><th scope="col">Preco</th></tr></thead>')
+                       $('#table-fatura').append('<thead id="thead-fatura"><tr><th scope="col">Nome</th><th scope="col">Fornecedor(es)</th><th scope="col">Preço</th></tr></thead>')
                        $('#table-fatura').append('<tbody id="tbody">')
                        $('#table-fatura').append('<tr><th scope="col">'+result.nome+'</th><th scope="col">'+fornecedores+'</th><th scope="col">'+result.preco+'</th></tr>')
                        $('#table-fatura').append('</tbody>')

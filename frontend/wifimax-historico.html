@@ -20,7 +20,7 @@
         <div class="container content-container mt-4 col-8 ">
             <h4 class="text-center">Histórico de Vendas</h4>  
 
-            <table class="table" id="table">
+            <table class="table table-hover table-striped" id="table">
             </table>
             <div class="col text-center">
                 <button id="voltar" type="button" class="btn btn-danger ml-3 mb-5">Voltar</button>
@@ -43,7 +43,7 @@
                     console.log(result);
                     
 
-                    $('#table').append('<thead id="thead"><tr><th scope="col">#</th><th scope="col">Preco Total</th><th scope="col">Data da Venda</th><th scope="col"></th></tr></thead>')
+                    $('#table').append('<thead id="thead"><tr><th scope="col">#</th><th scope="col">Preço Total</th><th scope="col">Data da Venda</th><th scope="col"></th></tr></thead>')
                         $('#table').append('<tbody id="tbody">')
                         result.forEach(element => {
                             let data = new Date(element.data_venda);
