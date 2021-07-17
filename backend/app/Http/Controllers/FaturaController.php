@@ -49,7 +49,7 @@ class FaturaController extends Controller
 
     public function adiconarProduto(Request $request){
         try {
-            $produto = Produto::where('id',$request->id)->with('produtos')->first();
+            $produto = Produto::where('id',$request->id)->with('fornecedores')->first();
             return response()->json($produto);
         } catch (QueryException $e) {
             return response()->json([
