@@ -17,8 +17,14 @@
     </head>
 
     <body class="content vertical-center">
-        <div class="container container-index text-center mt-4 mb-4 col-4">
+        <div class="container container-index text-center mt-4 mb-4 col-10">
             <h3>Detalhes da Fatura</h3>
+            <div class="form-row ml-3 mr-3">
+                <h5 class="ml-3">Fatura:</h5>
+                <table class="table" id="table-itens"></table>
+                <h5 id="valor-total"></h5>
+                
+            </div>
 
             <div class="col text-center">
                 <button id="voltar" type="button" class="btn btn-danger ml-3 mb-5">Voltar</button>
@@ -42,6 +48,29 @@
                 type:"GET",				//Método de envio
                    success: function (result){			//Sucesso no AJAX
                     console.log(result)
+                    $('#valor-total').append('Valor Total: '+result.preco_total)
+                    $('#table-itens').append('<thead id="thead"><tr><th scope="col">Nome</th><th scope="col">Preco</th><th scope="col">Fornecedor(es)</th></tr></thead>')
+                        $('#table-itens').append('<tbody id="tbody">')
+                    result.itens.forEach(iten => {
+                        let index=0
+                        iten.produto.fornecedores.forEach(fornecedor => {
+                            if(index == 0){
+                                fornecedores = fornecedor['nome']
+                            }else{
+                                fornecedores += ', '+fornecedor['nome']
+                            }
+                            index++
+                            
+                        });
+
+
+                            $('#table-itens').append('<tr><th scope="col">'+iten.produto.nome+'</th><th scope="col">'+iten.preco+'</th><th scope="col">'+fornecedores+'</th></tr>')
+
+                        
+    
+                
+                    });
+                    $('#table-itens').append('</tbody>')
 
 
             }

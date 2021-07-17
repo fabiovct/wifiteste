@@ -25,6 +25,11 @@ class ProdutoFatura extends Model
 
     protected $casts = [];
 
+    public function produto()
+    {
+        return $this->hasOne(Produto::class,'id', 'id_produto')->with('fornecedores');
+    }
+
 
 
 }

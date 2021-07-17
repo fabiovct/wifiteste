@@ -174,7 +174,7 @@
                        valor_total += result.preco
                     produtos_fatura.push(result)
                        $('#thead-fatura').remove()
-                       $('#table-fatura').append('<thead id="thead-fatura"><tr><th scope="col">Nome</th><th scope="col">Referência</th><th scope="col">Preco</th></tr></thead>')
+                       $('#table-fatura').append('<thead id="thead-fatura"><tr><th scope="col">Nome</th><th scope="col">Fornecedor(es)</th><th scope="col">Preco</th></tr></thead>')
                        $('#table-fatura').append('<tbody id="tbody">')
                        $('#table-fatura').append('<tr><th scope="col">'+result.nome+'</th><th scope="col">'+fornecedores+'</th><th scope="col">'+result.preco+'</th></tr>')
                        $('#table-fatura').append('</tbody>')

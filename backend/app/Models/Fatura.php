@@ -35,7 +35,7 @@ class Fatura extends Model
 
     public function itens()
     {
-        return $this->hasMany(ProdutoFatura::class,'id_fatura', 'id');
+        return $this->hasMany(ProdutoFatura::class,'id_fatura', 'id')->with('produto');
     }
 
 
