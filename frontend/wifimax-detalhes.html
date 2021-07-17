@@ -16,11 +16,39 @@
        
     </head>
 
-    <body class="content vertical-center">
-        <div class="container container-index text-center mt-4 mb-4 col-10">
-            <h3>Detalhes da Fatura</h3>
+    <body class="content">
+        <div class="container content-container mt-4 mb-4 col-8">
+            <h4 class="text-center">Detalhes da Fatura</h4> 
+
+            <h5 class="ml-3">Dados Da Fatura:</h5>
             <div class="form-row ml-3 mr-3">
-                <h5 class="ml-3">Fatura:</h5>
+                <div class="form-group col-lg-2">
+                  <label id="cep" for="cep"></label>
+                </div>
+            </div>
+            <div class="form-row ml-3 mr-3">
+
+                <div class="form-group col-lg-1">
+                  <label id="uf"></label>
+                  
+                </div>
+                <div class="form-group col-lg-3">
+                    <label id="cidade"></label>
+                </div>
+                <div class="form-group col-lg-4">
+                    <label id="bairro"></label>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label id="rua"></label>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label id="data-fatura"></label>
+                </div>
+            </div>
+
+            <hr class="linha-form"></hr>
+            <div class="form-row ml-3 mr-3">
+                <h5 class="ml-3">Itens:</h5>
                 <table class="table" id="table-itens"></table>
                 <h5 id="valor-total"></h5>
                 
@@ -48,6 +76,14 @@
                 type:"GET",				//Método de envio
                    success: function (result){			//Sucesso no AJAX
                     console.log(result)
+                    let data = new Date(result.data_venda);
+                            let dataFormatada = ((data.getDate()+1 )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear(); 
+                    $('#data-fatura').append('Data Fatura: '+dataFormatada)
+                    $('#cep').append('Cep: '+result.cep)
+                    $('#uf').append('UF: '+result.uf)
+                    $('#cidade').append('Cidade: '+result.cidade)
+                    $('#bairro').append('Bairro: '+result.bairro)
+                    $('#rua').append('Rua: '+result.rua)
                     $('#valor-total').append('Valor Total: '+result.preco_total)
                     $('#table-itens').append('<thead id="thead"><tr><th scope="col">Nome</th><th scope="col">Preco</th><th scope="col">Fornecedor(es)</th></tr></thead>')
                         $('#table-itens').append('<tbody id="tbody">')
