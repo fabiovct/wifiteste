@@ -18,7 +18,7 @@ Rodar o comando php artisan serve<br/>
 
 #FRONTEND<br/>
 
-Após rodar os comandos do back-end abrir o arquivo index.html no navegador<br/>
+Após rodar os comandos do back-end abrir o arquivo wifimax-index no navegador<br/>
 
 
 Fábio Vicentini<br/>
