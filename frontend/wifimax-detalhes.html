@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro da Fatura</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="_css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="_css/style.css" rel="stylesheet" type="text/css"/>         
+        
+    <script type='text/javascript' src='_js/jquery-3.3.1.js'></script>
+    <script>
+        $(document).ready(function () {
+            detalhes();
+        });
+    </script>
+       
+    </head>
+
+    <body class="content vertical-center">
+        <div class="container container-index text-center mt-4 mb-4 col-4">
+            <h3>Detalhes da Fatura</h3>
+
+            <div class="col text-center">
+                <button id="voltar" type="button" class="btn btn-danger ml-3 mb-5">Voltar</button>
+            </div>
+
+        </div>
+
+    </body>
+
+    <script>
+        
+        $('#voltar').click(function(){
+            $url =(window.location.href).split('-')[0]
+            window.location.href = $url+'-historico.html'
+
+        })
+
+        function detalhes(){
+            $.ajax({			//Função AJAX
+                url:"http://localhost:8000/api/fatura/historico-faturas/"+window.localStorage.getItem('id_fatura'),
+                type:"GET",				//Método de envio
+                   success: function (result){			//Sucesso no AJAX
+                    console.log(result)
+
+
+            }
+        })
+    }
+
+    </script>
+
+
+    </html>

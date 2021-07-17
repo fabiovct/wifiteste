@@ -31,6 +31,7 @@ Route::group(['prefix' => 'fatura'], function () {
     Route::post('cadastrar-fatura', [FaturaController::class, 'cadastrarFatura']);
     Route::post('adicionar-produto', [FaturaController::class, 'adiconarProduto']);
     Route::get('historico-faturas', [FaturaController::class, 'historicoFaturas']);
+    Route::get('historico-faturas/{id}', [FaturaController::class, 'historicoFaturasId']);
 });
 
 Route::group(['prefix' => 'endereco'], function () {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cadastro de Produtos</title>
+        <title>Cadastro da Fatura</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="_css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -11,9 +11,10 @@
        
     </head>
 
-    <body class="content">
+    <body class="content ">
         
-        <div class="container content-container mt-4 col-8">    
+        <div class="container content-container mt-4 col-8 ">
+            <h4 class="text-center">Cadastro da Fatura</h4>    
             <form method="POST" class="mt-5" id="formlogin">
                 <h5 class="ml-3">Endereço:</h5>
                 <div class="form-row ml-3 mr-3">
@@ -81,7 +82,10 @@
                     
                 </div>
 
-                <button type="submit" class="btn btn-sm btn-success mb-5">Cadastrar</button>
+                <button type="submit" class="btn btn-sm btn-success ml-3 mb-5">Cadastrar</button>
+                <div class="col text-center">
+                    <button id="voltar" type="button" class="btn btn-danger ml-3 mb-5">Voltar</button>
+                </div>
             </form>
         </div>
     </body>
@@ -92,6 +96,12 @@
         let produtos_fatura = []
         let endereco_completo;
         let valor_total=0
+
+        $('#voltar').click(function(){
+            $url =(window.location.href).split('-')[0]
+            window.location.href = $url+'-index.html'
+
+        })
          
          $('#pegar-endereco').click(function(){
             var cep=$('#cep').val()
@@ -181,7 +191,7 @@
                 type:"POST",				//Método de envio
                 data:{"preco_total":valor_total,"cep":$('#cep').val(),"uf":$('#uf').val(),"cidade":$('#cidade').val(),"bairro":$('#bairro').val(),"rua":$('#rua').val(),"itens":produtos_fatura},
                    success: function (result){			//Sucesso no AJAX
-                    console.log(result);
+                    alert('Fatura Cadastrada Com Sucesso')
                     }
             })
             return false;	//Evita que a página seja atualizada
@@ -193,7 +203,7 @@
                 type:"GET",				//Método de envio
                 // data: "email="+login+"&password="+password,	//Dados
                    success: function (result){			//Sucesso no AJAX
-                    alert('Fatura Cadastrada Com Sucesso')
+                    
                     }
             })
         }

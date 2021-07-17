@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro da Fatura</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="_css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="_css/style.css" rel="stylesheet" type="text/css"/>         
+        
+    <script type='text/javascript' src='_js/jquery-3.3.1.js'></script>
+       
+    </head>
+
+    <body class="content vertical-center">
+        <div class="container container-index text-center mt-4 mb-4 col-4">
+            <h3>Bem Vindo ao Sistema de Vendas</h3>
+            <button id="tela-cadastro" type="button" class=" mt-2 btn  btn-primary">Cadastrar Fatura</button>
+            <button id="tela-historico" type="button" class=" mt-2 btn  btn-primary">Histórico de Vendas</button>
+        </div>
+
+    </body>
+
+    <script>
+        
+        $('#tela-cadastro').click(function(){
+            $url =(window.location.href).split('-')[0]
+            window.location.href = $url+'-fatura.html'
+        })
+        $('#tela-historico').click(function(){
+            $url =(window.location.href).split('-')[0]
+            window.location.href = $url+'-historico.html'
+        })
+    </script>
+
+
+    </html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro da Fatura</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="_css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="_css/style.css" rel="stylesheet" type="text/css"/>         
+        
+    <script type='text/javascript' src='_js/jquery-3.3.1.js'></script>
+    <script>
+    $(document).ready(function () {
+        historico();
+    });
+    </script>
+       
+    </head>
+
+    <body class="content">
+        <div class="container content-container mt-4 col-8 ">
+            <h4 class="text-center">Histórico de Vendas</h4>  
+
+            <table class="table" id="table">
+            </table>
+            <div class="col text-center">
+                <button id="voltar" type="button" class="btn btn-danger ml-3 mb-5">Voltar</button>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+        $('#voltar').click(function(){
+            $url =(window.location.href).split('-')[0]
+            window.location.href = $url+'-index.html'
+
+        })
+        function historico(){
+            $.ajax({			//Função AJAX
+                url:"http://localhost:8000/api/fatura/historico-faturas",
+                type:"GET",				//Método de envio
+                   success: function (result){			//Sucesso no AJAX
+                    console.log(result);
+                    
+
+                    $('#table').append('<thead id="thead"><tr><th scope="col">#</th><th scope="col">Preco Total</th><th scope="col">Data da Venda</th><th scope="col"></th></tr></thead>')
+                        $('#table').append('<tbody id="tbody">')
+                        result.forEach(element => {
+                            let data = new Date(element.data_venda);
+                            let dataFormatada = ((data.getDate()+1 )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear(); 
+                            console.log(dataFormatada)
+                            $('#table').append('<tr><th scope="col">'+element.id+'</th><th scope="col">'+element.preco_total+'</th><th scope="col">'+dataFormatada+'</th><th scope="col"><button onclick="verDetalhes(\''+element.id+'\');" id="add-produto" type="button" class=" mt-2 btn btn-sm btn-primary">Ver Detalhes</button></th></tr>')
+                        });
+                        $('#table').append('</tbody>')
+
+                        }
+            })
+    }
+
+    function verDetalhes(id){
+        $url =(window.location.href).split('-')[0]
+        // window.localStorage.removeItem('id_fatura');
+        window.localStorage.setItem('id_fatura', id);
+       
+        window.location.href = $url+'-detalhes.html'
+            
+
+    }
+
+    </script>
+
+
+    </html>

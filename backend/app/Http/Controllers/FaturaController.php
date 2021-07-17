@@ -70,6 +70,18 @@ class FaturaController extends Controller
         }  
     }
 
+    public function historicoFaturasId(Request $request){
+        try {
+            $fatura = Fatura::where('id',$request->id)->with('itens')->first();
+            
+            return response()->json($fatura);
+        } catch (QueryException $e) {
+            return response()->json([
+                "error" => $e
+            ]);
+        }  
+    }
+
 }
 
 /*
