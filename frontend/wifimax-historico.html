@@ -58,11 +58,11 @@
     }
 
     function verDetalhes(id){
-        $url =(window.location.href).split('-')[0]
+        $url =(window.location.href).split('wifimax-historico')[0]
         // window.localStorage.removeItem('id_fatura');
         window.localStorage.setItem('id_fatura', id);
        
-        window.location.href = $url+'-detalhes.html'
+        window.location.href = $url+'wifimax-detalhes.html'
             
 
     }
