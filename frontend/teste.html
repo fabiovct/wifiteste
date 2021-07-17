@@ -8,15 +8,6 @@
         <link href="_css/style.css" rel="stylesheet" type="text/css"/>         
         
     <script type='text/javascript' src='_js/jquery-3.3.1.js'></script>
-    <script>
-
-// $(document).ready(function () {
-//         yourFunction();
-//     });
-    
-    
-    
-    </script>
        
     </head>
 
@@ -28,7 +19,7 @@
                 <div class="form-row ml-3 mr-3">
                     <div class="form-group col-lg-2">
                       <label for="cep">Cep</label>
-                      <input type="text" class="form-control" id="cep">
+                      <input required type="text" class="form-control" id="cep">
                       <button id="pegar-endereco" type="button" class=" mt-2 btn btn-sm btn-primary">Procurar</button>
                     </div>
                 </div>
@@ -36,19 +27,19 @@
 
                     <div class="form-group col-lg-1">
                       <label for="uf">UF</label>
-                      <input readonly type="text" class="form-control" id="uf">
+                      <input required readonly type="text" class="form-control" id="uf">
                     </div>
                     <div class="form-group col-lg-3">
                         <label for="cidade">Cidade</label>
-                        <input readonly type="text" class="form-control" id="cidade">
+                        <input required readonly type="text" class="form-control" id="cidade">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="bairro">Bairro</label>
-                        <input readonly type="text" class="form-control" id="bairro">
+                        <input required readonly type="text" class="form-control" id="bairro">
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="rua">Rua</label>
-                        <input readonly type="text" class="form-control" id="rua">
+                        <input required readonly type="text" class="form-control" id="rua">
                     </div>
                 </div>
 
@@ -86,40 +77,30 @@
                 <div class="form-row ml-3 mr-3">
                     <h5 class="ml-3">Fatura:</h5>
                     <table class="table" id="table-fatura"></table>
-                    <h5>Valor Total:<input id="valor_total" readonly></h5>
+                    <h5>Valor Total:<input required id="valor_total" readonly></h5>
                     
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-5">Cadastrar</button>
+                <button type="submit" class="btn btn-sm btn-success mb-5">Cadastrar</button>
             </form>
         </div>
     </body>
 
 
-
-     <footer>
-        <div id="footer"></div>
-     </footer>
-
-     <script>
-
-
-
+    <script>
 
         let produtos_fatura = []
-         let endereco_completo;
-         let valor_total=0
+        let endereco_completo;
+        let valor_total=0
          
          $('#pegar-endereco').click(function(){
             var cep=$('#cep').val()
             $.ajax({			//Função AJAX
-                url:"http://localhost:8000/api/endereco/buscar-dados",			//Arquivo php
+                url:"http://localhost:8000/api/endereco/buscar-dados",			
                 type:"POST",				//Método de envio
                 data:{"cep":cep},
                    success: function (result){			//Sucesso no AJAX
-                        console.log(result);
                         endereco_completo = result;
-                        console.log(endereco_completo['uf']);
 
                         document.getElementById('uf').value = endereco_completo['uf'];
                         document.getElementById('cidade').value = endereco_completo['localidade'];
@@ -135,7 +116,7 @@
             var tipo_busca=$('#tipo_busca').val()
             var busca_produto=$('#busca_produto').val()
             $.ajax({			//Função AJAX
-                url:"http://localhost:8000/api/produtos/search-produtos",			//Arquivo php
+                url:"http://localhost:8000/api/produtos/search-produtos",		
                 type:"POST",				//Método de envio
                 data:{"tipo_busca":tipo_busca,"busca_produto":busca_produto},
                    success: function (result){			//Sucesso no AJAX
@@ -180,81 +161,30 @@
              
          }
 
-        //  function criarTabela(conteudo) {
-        //     var tabela = document.createElement("table");
-        //     var thead = document.createElement("thead");
-        //     var tbody=document.createElement("tbody");
-        //     var thd=function(i){return (i==0)?"th":"td";};
-        //     for (var i=0;i<conteudo.length;i++) {
-        //         var tr = document.createElement("tr");
-        //         for(var o=0;o<conteudo[i].length;o++){
-        //         var t = document.createElement(thd(i));
-        //         var texto=document.createTextNode(conteudo[i][o]);
-        //         t.appendChild(texto);
-        //         tr.appendChild(t);
-        //         }
-        //         (i==0)?thead.appendChild(tr):tbody.appendChild(tr);
-        //     }
-        //     tabela.appendChild(thead);
-        //     tabela.appendChild(tbody);
-        //     return tabela;
-        //     }
-        //     var texto = '<button id="teste" class="btn btn-primary mb-5"> teste </button>';
-        //     var parser = new DOMParser();
-        //     var htmlDoc = parser.parseFromString(texto, "text/html");
-        //     var body = htmlDoc.querySelector('body');
-        //     var span = body.querySelector('button');
-        //     document.getElementById("tabela").appendChild(criarTabela([
-        //     ["Nome ",   " Preco "," Fornecedor ",  " "],
-        //     ["teste","1111","teste",$.parseHTML('<button id="teste" class="btn btn-primary mb-5"> teste </button>')]
-        //     ]));
-            
-         
-        // $("#header").load('header.html');
-        // $("#footer").load('footer.html');
-        //login
-
-        // $(document).ready(function(){
-        //$('#errolog').hide(); //Esconde o elemento com id errolog
         $('#formlogin').submit(function(){ 	//Ao submeter formulário
-            // var login=$('#email').val();	//Pega valor do campo email
-            // var password=$('#password').val();	//Pega valor do campo senha
+
             $.ajax({			//Função AJAX
-                url:"http://localhost:8000/api/fatura/historico-faturas",			//Arquivo php
-                type:"GET",				//Método de envio
-                // data: "email="+login+"&password="+password,	//Dados
+                url:"http://localhost:8000/api/fatura/cadastrar-fatura", 
+                type:"POST",				//Método de envio
+                data:{"preco_total":valor_total,"cep":$('#cep').val(),"uf":$('#uf').val(),"cidade":$('#cidade').val(),"bairro":$('#bairro').val(),"rua":$('#rua').val(),"itens":produtos_fatura},
                    success: function (result){			//Sucesso no AJAX
                     console.log(result);
-                            // if(result==1){					
-                            //     location.href='sistema_interno.html'	//Redireciona
-                            // }else{
-                            //     //$('#errolog').show();		//Informa o erro
-                            //     location.href='index.html'
-                            // }
-                        }
+                    }
             })
             return false;	//Evita que a página seja atualizada
         })
 
         function yourFunction(){
             $.ajax({			//Função AJAX
-                url:"http://localhost:8000/api/fatura/historico-faturas",			//Arquivo php
+                url:"http://localhost:8000/api/fatura/historico-faturas",
                 type:"GET",				//Método de envio
                 // data: "email="+login+"&password="+password,	//Dados
                    success: function (result){			//Sucesso no AJAX
-                    console.log(result);
-                            // if(result==1){					
-                            //     location.href='sistema_interno.html'	//Redireciona
-                            // }else{
-                            //     //$('#errolog').show();		//Informa o erro
-                            //     location.href='index.html'
-                            // }
-                        }
+                    alert('Fatura Cadastrada Com Sucesso')
+                    }
             })
-    }
-    // })
-        
+        }
+
         </script>
      
-    
 </html>

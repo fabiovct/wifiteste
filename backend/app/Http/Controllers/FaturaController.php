@@ -35,7 +35,7 @@ class FaturaController extends Controller
                 $produto_fatura = new ProdutoFatura();
                 $produto_fatura->id_fatura = $fatura->id;
                 $produto_fatura->preco = $iten['preco'];
-                $produto_fatura->id_produto = $iten['id_produto'];
+                $produto_fatura->id_produto = $iten['id'];
                 $produto_fatura->save();
             }
 
