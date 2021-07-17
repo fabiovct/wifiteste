@@ -192,6 +192,8 @@
                 data:{"preco_total":valor_total,"cep":$('#cep').val(),"uf":$('#uf').val(),"cidade":$('#cidade').val(),"bairro":$('#bairro').val(),"rua":$('#rua').val(),"itens":produtos_fatura},
                    success: function (result){			//Sucesso no AJAX
                     alert('Fatura Cadastrada Com Sucesso')
+                    $url =(window.location.href).split('wifimax-fatura')[0]
+            window.location.href = $url+'wifimax-index.html'
                     }
             })
             return false;	//Evita que a página seja atualizada

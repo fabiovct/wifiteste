@@ -60,7 +60,7 @@ class FaturaController extends Controller
 
     public function historicoFaturas(){
         try {
-            $faturas = Fatura::with('itens')->get();
+            $faturas = Fatura::with('itens')->orderBy('data_venda','desc')->get();
             
             return response()->json($faturas);
         } catch (QueryException $e) {

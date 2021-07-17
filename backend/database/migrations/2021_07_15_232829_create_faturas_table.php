@@ -15,13 +15,13 @@ class CreateFaturasTable extends Migration
     {
         Schema::create('faturas', function (Blueprint $table) {
             $table->id();
-            $table->float('preco_total',8,2);
-            $table->date('data_venda');
-            $table->string('cep');
-            $table->string('uf');
-            $table->string('cidade');//localidade
-            $table->string('bairro');
-            $table->text('rua');//logradouro
+            $table->float('preco_total',8,2)->nullable();
+            $table->date('data_venda')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('uf')->nullable();
+            $table->string('cidade')->nullable();//localidade
+            $table->string('bairro')->nullable();
+            $table->text('rua')->nullable();//logradouro
             $table->timestamps();
         });
     }

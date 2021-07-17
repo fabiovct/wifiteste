@@ -16,7 +16,7 @@ class CreateProdutosFaturasTable extends Migration
         Schema::create('produtos_faturas', function (Blueprint $table) {
             $table->id();
             $table->integer('id_produto');
-            $table->float('preco',8,2);
+            $table->float('preco',8,2)->nullable();
             $table->integer('id_fatura');
             $table->timestamps();
         });
