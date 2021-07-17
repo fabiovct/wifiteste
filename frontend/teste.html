@@ -68,17 +68,27 @@
                         <input type="text" class="form-control" id="busca_produto">
                     </div>
 
+
                 </div>
+                
                 <div class="form-row ml-3 mr-3">
                     <div class="form-group col-lg-3">
                     <button id="buscar-produtos" type="button" class=" mt-2 btn btn-sm btn-primary">Buscar</button>
                     </div>
+
+
                 </div>
+                <table class="table" id="table">
+                </table>
 
                 <hr class="linha-form"></hr>
 
-
-
+                <div class="form-row ml-3 mr-3">
+                    <h5 class="ml-3">Fatura:</h5>
+                    <table class="table" id="table-fatura"></table>
+                    <h5>Valor Total:<input id="valor_total" readonly></h5>
+                    
+                </div>
 
                 <button type="submit" class="btn btn-primary mb-5">Cadastrar</button>
             </form>
@@ -92,7 +102,14 @@
      </footer>
 
      <script>
+
+
+
+
+        let produtos_fatura = []
          let endereco_completo;
+         let valor_total=0
+         
          $('#pegar-endereco').click(function(){
             var cep=$('#cep').val()
             $.ajax({			//Função AJAX
@@ -123,10 +140,75 @@
                 data:{"tipo_busca":tipo_busca,"busca_produto":busca_produto},
                    success: function (result){			//Sucesso no AJAX
                         console.log(result);
+                        
+                        var result_dados = result;
+                        $('#thead').remove()
+                        $('#tbody').remove()
+                        $('#table').append('<thead id="thead"><tr><th scope="col">Nome</th><th scope="col">Preco</th><th scope="col">Referência</th><th scope="col"></th></tr></thead>')
+                        $('#table').append('<tbody id="tbody">')
+                        result_dados.forEach(element => {
+                            var b=element.referencia
+                            $('#table').append('<tr><th scope="col">'+element.nome+'</th><th scope="col">'+element.preco+'</th><th scope="col">'+element.referencia+'</th><th scope="col"><button onclick="addProduto(\''+element.id+'\');" id="add-produto" type="button" class=" mt-2 btn btn-sm btn-primary">Adcionar</button></th></tr>')
+                        });
+                        $('#table').append('</tbody>')
+                        
                     }
             })
             return false;	//Evita que a página seja atualizada
          })
+
+         function addProduto(id_produto) {
+            // event.preventDefault();
+            //adicionar-produto
+            
+
+            $.ajax({
+                url:"http://localhost:8000/api/fatura/adicionar-produto",
+                type:"POST",				//Método de envio
+                data:{"id":id_produto},
+                   success: function (result){
+                       valor_total += result.preco
+                    produtos_fatura.push(result)
+                       $('#thead-fatura').remove()
+                       $('#table-fatura').append('<thead id="thead-fatura"><tr><th scope="col">Nome</th><th scope="col">Referência</th><th scope="col">Preco</th></tr></thead>')
+                       $('#table-fatura').append('<tbody id="tbody">')
+                       $('#table-fatura').append('<tr><th scope="col">'+result.nome+'</th><th scope="col">'+result.referencia+'</th><th scope="col">'+result.preco+'</th></tr>')
+                       $('#table-fatura').append('</tbody>')
+                       $('#valor_total').val(valor_total)
+                   }
+            })
+             
+         }
+
+        //  function criarTabela(conteudo) {
+        //     var tabela = document.createElement("table");
+        //     var thead = document.createElement("thead");
+        //     var tbody=document.createElement("tbody");
+        //     var thd=function(i){return (i==0)?"th":"td";};
+        //     for (var i=0;i<conteudo.length;i++) {
+        //         var tr = document.createElement("tr");
+        //         for(var o=0;o<conteudo[i].length;o++){
+        //         var t = document.createElement(thd(i));
+        //         var texto=document.createTextNode(conteudo[i][o]);
+        //         t.appendChild(texto);
+        //         tr.appendChild(t);
+        //         }
+        //         (i==0)?thead.appendChild(tr):tbody.appendChild(tr);
+        //     }
+        //     tabela.appendChild(thead);
+        //     tabela.appendChild(tbody);
+        //     return tabela;
+        //     }
+        //     var texto = '<button id="teste" class="btn btn-primary mb-5"> teste </button>';
+        //     var parser = new DOMParser();
+        //     var htmlDoc = parser.parseFromString(texto, "text/html");
+        //     var body = htmlDoc.querySelector('body');
+        //     var span = body.querySelector('button');
+        //     document.getElementById("tabela").appendChild(criarTabela([
+        //     ["Nome ",   " Preco "," Fornecedor ",  " "],
+        //     ["teste","1111","teste",$.parseHTML('<button id="teste" class="btn btn-primary mb-5"> teste </button>')]
+        //     ]));
+            
          
         // $("#header").load('header.html');
         // $("#footer").load('footer.html');
