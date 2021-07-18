@@ -31,8 +31,8 @@
 
     <script>
         $('#voltar').click(function(){
-            $url =(window.location.href).split('-')[0]
-            window.location.href = $url+'-index.html'
+            $url =(window.location.href).split('wifimax-historico.html')[0]
+            window.location.href = $url+'wifimax-index.html'
 
         })
         function historico(){
@@ -58,7 +58,7 @@
     }
 
     function verDetalhes(id){
-        $url =(window.location.href).split('wifimax-historico')[0]
+        $url =(window.location.href).split('wifimax-historico.html')[0]
         // window.localStorage.removeItem('id_fatura');
         window.localStorage.setItem('id_fatura', id);
        
