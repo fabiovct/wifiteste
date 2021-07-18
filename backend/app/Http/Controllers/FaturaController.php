@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Fatura;
 use App\Models\Produto;
 use App\Models\ProdutoFatura;
+use App\Repositories\FaturaRepository;
+use App\Repositories\ProdutoRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Date;
 
@@ -15,31 +17,7 @@ class FaturaController extends Controller
 
     public function cadastrarFatura(Request $request){
         try {
-
-            // return $request->itens;
-
-            $fatura = new Fatura();
-            $fatura->preco_total = $request->preco_total;
-            $fatura->data_venda = Date::now();
-            $fatura->cep = $request->cep;
-            $fatura->uf = $request->uf;
-            $fatura->cidade = $request->cidade;
-            $fatura->bairro = $request->bairro;
-            $fatura->rua = $request->rua;
-            $fatura->save();
-
-
-        
-
-            foreach($request->itens as $iten){
-                $produto_fatura = new ProdutoFatura();
-                $produto_fatura->id_fatura = $fatura->id;
-                $produto_fatura->preco = $iten['preco'];
-                $produto_fatura->id_produto = $iten['id'];
-                $produto_fatura->save();
-            }
-
-            return response()->json('Fatura Cadastrada Com Sucesso');
+            return FaturaRepository::createFatura($request);
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
@@ -47,10 +25,9 @@ class FaturaController extends Controller
         }  
     }
 
-    public function adiconarProduto(Request $request){
+    public function adicionarProduto(Request $request){
         try {
-            $produto = Produto::where('id',$request->id)->with('fornecedores')->first();
-            return response()->json($produto);
+            return ProdutoRepository::getProdutoById($request->id);
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
@@ -60,9 +37,7 @@ class FaturaController extends Controller
 
     public function historicoFaturas(){
         try {
-            $faturas = Fatura::with('itens')->orderBy('data_venda','desc')->get();
-            
-            return response()->json($faturas);
+            return FaturaRepository::getFaturas();
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
@@ -72,9 +47,7 @@ class FaturaController extends Controller
 
     public function historicoFaturasId(Request $request){
         try {
-            $fatura = Fatura::where('id',$request->id)->with('itens')->first();
-            
-            return response()->json($fatura);
+            return FaturaRepository::getFaturaById($request->id);
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
@@ -83,12 +56,3 @@ class FaturaController extends Controller
     }
 
 }
-
-/*
-O cliente necessita ter o o 
-histórico completo das vendas, 
-com seus itens, 
-valor total, 
-data e 
-endereço de entrega completo;
-*/
