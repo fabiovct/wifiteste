@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\ViaCepService;
 use GuzzleHttp\Client;
 use Illuminate\Database\QueryException;
 
@@ -13,15 +14,14 @@ class EnderecoController extends Controller
     public function buscarDados(Request $request){
         try {
 
-            $client = new Client();
-            $cep = $request->cep;
-            $url = "https://viacep.com.br/ws/{$cep}/json/";
-            $endereco = $client->request('GET', $url);
-
-            $data = json_decode($endereco->getBody()->getContents(), true);
-            return $data;
+            $cep = explode('-',$request->cep);
+            if(isset($cep[1])){
+                $cep = $cep[0].$cep[1];
+                return ViaCepService::dadosEndereco($cep);
+            }else{
+                return ViaCepService::dadosEndereco($request->cep);
+            }
             
-            // return response()->json($data);
         } catch (QueryException $e) {
             return response()->json([
                 "error" => $e
