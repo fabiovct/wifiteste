@@ -1,7 +1,5 @@
 #BACKEND LARAVEL<br/>
 
-Versão do PHP 7.4.16<br/>
-
 Versão do Laravel 8<br/>
 
 Instruções:<br/>
@@ -18,7 +16,7 @@ Rodar o comando php artisan serve<br/>
 
 #FRONTEND<br/>
 
-Após rodar os comandos do back-end abrir o arquivo wifimax-index no navegador<br/>
+Após rodar os comandos do backend abrir o arquivo wifimax-index no navegador<br/>
 
 
 Fábio Vicentini<br/>
